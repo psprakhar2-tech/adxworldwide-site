@@ -930,30 +930,153 @@
     .btn-nav{display:none}
     .footer-grid{grid-template-columns:1fr;gap:36px}
   }
+  /* ============================================================
+     MOBILE — tight, intentional, premium
+     Consistent spacing system: 72px / 56px section padding,
+     20px gap inside grids, 14px gap inside tight stacks.
+     ============================================================ */
   @media (max-width: 720px){
-    section{padding:96px 22px}
-    .nav-inner{padding:14px 22px}
-    .hero{padding:130px 22px 64px}
-    .hero h1{font-size:38px}
-    .hero-sub{font-size:16px}
-    .hero-ctas{flex-direction:column;align-items:stretch}
-    .hero-ctas .btn{width:100%;justify-content:center}
-    .workflow-card{padding:22px}
-    .stats-grid{grid-template-columns:1fr;}
-    .stats-grid .cell{padding:32px 24px;border-left:none;border-top:1px solid var(--line)}
-    .stats-grid .cell:first-child{border-top:none}
-    .stat-num{font-size:44px}
-    .problem h2,.vsl-head h2,.si-head h2,.tp-head h2,.agents-head h2,.nm-head h2,.pr-head h2,.mid-cta h2,.final-cta h2{
-      font-size:32px;
+    /* Spacing system */
+    section{padding:72px 20px}
+    .wrap,.wrap-tight,.wrap-narrow{max-width:100%}
+
+    /* Nav */
+    .nav-inner{padding:12px 18px}
+    .nav.scrolled .nav-inner{padding:10px 18px}
+    .hamburger{width:36px;height:36px}
+
+    /* ===== HERO ===== */
+    .hero{padding:110px 20px 60px}
+    .hero-grid{gap:40px}
+    .hero-eyebrow{margin-bottom:22px;font-size:11px;padding:6px 12px}
+    .hero h1{font-size:36px;line-height:1.06;margin-bottom:18px;letter-spacing:-0.03em}
+    .hero-sub{font-size:15px;line-height:1.6;margin-bottom:28px}
+    .hero-ctas{flex-direction:column;align-items:stretch;gap:10px;margin-bottom:18px}
+    .hero-ctas .btn{width:100%;justify-content:center;padding:14px 22px;font-size:14.5px}
+    .hero-trust{font-size:12px;gap:10px}
+
+    /* Workflow card — compact */
+    .workflow-card{padding:18px;border-radius:14px}
+    .wc-head{padding-bottom:14px;margin-bottom:14px}
+    .wc-title{font-size:12.5px}
+    .wc-status{font-size:10px}
+    .wc-steps{gap:6px}
+    .wc-step{padding:10px 12px;gap:12px;border-radius:9px}
+    .wc-icon{width:30px;height:30px;border-radius:7px}
+    .wc-label{font-size:12.5px}
+    .wc-meta{font-size:10.5px}
+    .wc-arrow{margin:-2px 0 -2px 20px;height:10px}
+    .wc-foot{margin-top:14px;padding-top:12px;font-size:11px}
+
+    /* ===== STATS — 2x2 compact grid ===== */
+    .stats{padding:0 20px}
+    .stats-grid{
+      grid-template-columns:1fr 1fr;
+      border:1px solid var(--line);border-radius:14px;
+      background:#fff;
+      overflow:hidden;
+      box-shadow:0 8px 24px -16px rgba(11,11,13,0.1);
     }
-    .leak-grid{grid-template-columns:1fr}
-    .agents-grid{grid-template-columns:1fr}
-    .nm-grid{grid-template-columns:1fr}
-    .tp-card{padding:32px 26px}
-    .video-frame{padding:8px;border-radius:14px}
-    .final-cta{padding:110px 22px}
-    .footer-bottom{flex-direction:column;text-align:center;gap:10px}
-    .btn-primary.lg{width:100%;padding:16px 24px;font-size:15px}
+    .stats-grid .cell{
+      padding:22px 18px;
+      border:none !important;
+      border-top:1px solid var(--line) !important;
+      border-left:1px solid var(--line) !important;
+    }
+    .stats-grid .cell:nth-child(1),
+    .stats-grid .cell:nth-child(2){border-top:none !important}
+    .stats-grid .cell:nth-child(odd){border-left:none !important}
+    .stat-num{font-size:36px;margin-bottom:6px}
+    .stat-label{font-size:11.5px;line-height:1.45;max-width:none}
+
+    /* ===== Section heads — tighter ===== */
+    .problem-head,.vsl-head,.si-head,.tp-head,.agents-head,.nm-head,.pr-head{margin-bottom:36px !important}
+    .problem h2,.vsl-head h2,.si-head h2,.tp-head h2,.agents-head h2,.nm-head h2,.pr-head h2,.mid-cta h2,.final-cta h2{
+      font-size:30px !important;line-height:1.08;margin-top:16px;
+    }
+    .eyebrow{font-size:10.5px;letter-spacing:0.18em}
+    .problem-sub,.agents-head .sub{font-size:15px;line-height:1.6;margin-top:14px}
+    .si-body{margin-top:28px}
+    .si-body p{font-size:15px;line-height:1.7;margin-bottom:16px}
+
+    /* ===== PROBLEM — leak cards 2-col compact ===== */
+    .leak-grid{grid-template-columns:1fr 1fr;gap:12px}
+    .leak-card{padding:18px;border-radius:12px}
+    .leak-card .num{font-size:30px;margin-bottom:6px}
+    .leak-card .who{font-size:10px;letter-spacing:0.14em;margin-bottom:12px}
+    .leak-card .what{font-size:13.5px;margin-bottom:6px;line-height:1.35}
+    .leak-card .why{font-size:12px;line-height:1.5}
+    .leak-tag{margin-top:12px;padding-top:10px;font-size:10px}
+
+    /* ===== VSL ===== */
+    .vsl-head{margin-bottom:32px !important}
+    .video-frame{padding:6px;border-radius:12px}
+    .vsl-caption{margin-top:18px;font-size:14px}
+    .vsl-cta{margin-top:24px;gap:10px}
+    .vsl-cta-meta{font-size:12px}
+
+    /* ===== TWO PART ===== */
+    .tp-grid{gap:14px}
+    .tp-card{padding:28px 22px;border-radius:14px}
+    .tp-tag{margin-bottom:14px;font-size:10px}
+    .tp-card h3{font-size:21px;line-height:1.22;margin-bottom:14px}
+    .tp-card p{font-size:14px;line-height:1.65;margin-bottom:20px}
+    .tp-result{padding:12px 14px;font-size:13px}
+
+    /* ===== AGENTS — 2 col compact ===== */
+    .agents-grid{grid-template-columns:1fr 1fr;gap:12px}
+    .agent-card{padding:20px 18px;border-radius:14px}
+    .ag-head{margin-bottom:16px}
+    .ag-icon{width:38px;height:38px;border-radius:9px}
+    .ag-icon svg{width:16px;height:16px}
+    .ag-num{font-size:18px}
+    .agent-card h3{font-size:16px;margin-bottom:8px;line-height:1.2}
+    .agent-card p{font-size:12.5px;line-height:1.55;margin-bottom:14px}
+    .ag-metric{padding-top:12px}
+    .ag-metric .val{font-size:17px}
+    .ag-metric .lbl{font-size:9.5px}
+
+    /* ===== NUMBERS — 2 col compact ===== */
+    .nm-grid{grid-template-columns:1fr 1fr;gap:12px}
+    .nm-card{padding:22px 18px;border-radius:12px}
+    .nm-eyebrow{font-size:10px;letter-spacing:0.14em;margin-bottom:12px}
+    .nm-big{font-size:26px;margin-bottom:10px}
+    .nm-lbl{font-size:12px;line-height:1.5}
+
+    /* ===== PROCESS ===== */
+    .pr-row{gap:32px}
+    .pr-step{padding:0}
+    .pr-step + .pr-step{padding-top:32px}
+    .pr-num{font-size:44px;margin-bottom:14px}
+    .pr-step h3{font-size:18px;margin-bottom:10px}
+    .pr-step p{font-size:14px;line-height:1.65}
+    .pr-time{margin-top:14px;font-size:10px}
+
+    /* ===== MID CTA ===== */
+    .mid-cta p{font-size:15px;margin-bottom:24px}
+    .mid-meta{font-size:12px;margin-top:14px}
+
+    /* ===== FINAL CTA ===== */
+    .final-cta{padding:90px 20px}
+    .final-cta p{font-size:15px;margin-bottom:32px;line-height:1.65}
+    .final-meta{font-size:12px;margin-top:16px}
+    .final-meta-tiny{font-size:11px}
+    .btn-primary.lg{width:100%;padding:15px 22px;font-size:15px;border-radius:9px}
+
+    /* ===== FOOTER ===== */
+    footer{padding:44px 20px 24px}
+    .footer-grid{gap:28px}
+    .footer-bottom{flex-direction:column;text-align:center;gap:8px;margin-top:32px;padding-top:18px;font-size:11.5px}
+    .footer-col a{padding:5px 0;font-size:13.5px}
+  }
+
+  @media (max-width: 420px){
+    section{padding:64px 18px}
+    .hero{padding:104px 18px 52px}
+    .hero h1{font-size:32px}
+    .leak-grid,.agents-grid,.nm-grid{grid-template-columns:1fr;gap:10px}
+    .stats-grid .cell{padding:20px 14px}
+    .stat-num{font-size:32px}
   }
 </style>
 </head>
