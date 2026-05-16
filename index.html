@@ -1078,6 +1078,236 @@
     .stats-grid .cell{padding:20px 14px}
     .stat-num{font-size:32px}
   }
+
+  /* ============================================================
+     ATMOSPHERIC BLOBS — organic, soft, drifting light
+     Brand-palette ambient shapes inspired by luxury AI infra brands.
+     Heavily blurred, low-opacity, asymmetric. Sit behind content.
+     ============================================================ */
+  .blob-layer{
+    position:absolute;inset:0;
+    pointer-events:none;overflow:hidden;
+    z-index:0;
+  }
+  .blob{
+    position:absolute;
+    filter:blur(90px);
+    opacity:0.55;
+    border-radius:60% 40% 55% 45% / 50% 60% 40% 50%;
+    will-change:transform;
+  }
+  .blob-red       {background:radial-gradient(circle at 35% 35%, rgba(204,0,0,0.85), rgba(204,0,0,0) 65%)}
+  .blob-red-soft  {background:radial-gradient(circle at 35% 35%, rgba(204,0,0,0.45), rgba(204,0,0,0) 70%)}
+  .blob-warm      {background:radial-gradient(circle at 35% 35%, rgba(255,205,175,0.55), rgba(255,205,175,0) 72%)}
+  .blob-light     {background:radial-gradient(circle at 35% 35%, rgba(255,255,255,0.35), rgba(255,255,255,0) 70%)}
+  .blob-ink       {background:radial-gradient(circle at 35% 35%, rgba(11,11,13,0.35), rgba(11,11,13,0) 70%)}
+  @keyframes drift-a{
+    0%  {transform:translate(0,0) scale(1) rotate(0deg)}
+    50% {transform:translate(34px,-22px) scale(1.08) rotate(8deg)}
+    100%{transform:translate(-22px,30px) scale(0.96) rotate(-6deg)}
+  }
+  @keyframes drift-b{
+    0%  {transform:translate(0,0) scale(1) rotate(0deg)}
+    50% {transform:translate(-42px,20px) scale(1.10) rotate(-9deg)}
+    100%{transform:translate(22px,-32px) scale(0.94) rotate(7deg)}
+  }
+  .blob.a{animation:drift-a 28s ease-in-out infinite alternate}
+  .blob.b{animation:drift-b 32s ease-in-out infinite alternate}
+
+  /* Make sure structural content sits above the blob layer */
+  section > *:not(.blob-layer){position:relative;z-index:2}
+
+  /* Sections that didn't previously clip overflow — they do now */
+  .two-part,.numbers,.system-intro,.process{overflow:hidden}
+
+  /* Soften blobs on mobile so they read as light, not pattern */
+  @media (max-width: 720px){
+    .blob{filter:blur(70px);opacity:0.42}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .blob{animation:none !important}
+  }
+
+  /* ============================================================
+     ENVIRONMENTAL DEPTH — layered backgrounds, ambient lighting,
+     soft section transitions, faint grain.
+     Sits above existing rules so each section gets richer atmosphere
+     without altering structural design.
+     ============================================================ */
+
+  /* Faint grain across the whole page — extremely low-opacity SVG noise */
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:1;
+    opacity:0.035;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+  /* Make sure content sits above grain */
+  nav.nav, section, footer, .stats{position:relative;z-index:2}
+
+  /* ---------- Ambient lighting on sections ---------- */
+  .hero{
+    background:
+      radial-gradient(900px 500px at 88% 12%, rgba(204,0,0,0.10), transparent 60%),
+      radial-gradient(800px 480px at 8% 88%, rgba(11,11,13,0.045), transparent 65%),
+      linear-gradient(180deg, #f3eee5 0%, #f7f3eb 14%, var(--bg) 38%, var(--bg) 100%);
+  }
+  /* Soft tonal fade out of hero into the stats strip */
+  .hero::after{
+    z-index:0;
+  }
+
+  .stats{
+    background:
+      radial-gradient(600px 200px at 50% 0%, rgba(11,11,13,0.04), transparent 70%),
+      var(--bg);
+  }
+
+  .problem{
+    background:
+      radial-gradient(700px 480px at 92% 8%, rgba(204,0,0,0.10), transparent 60%),
+      radial-gradient(900px 600px at 8% 100%, rgba(204,0,0,0.18), transparent 65%),
+      var(--charcoal);
+  }
+  /* Tonal blend INTO the dark problem section from light hero/stats above */
+  .problem::before{
+    background-image:radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size:34px 34px;
+  }
+  /* Soft fade from light → dark at top edge */
+  .stats + .problem{
+    box-shadow:inset 0 80px 80px -60px rgba(250,248,245,0.55);
+  }
+
+  /* VSL — ambient light pool */
+  .vsl{
+    background:
+      radial-gradient(640px 360px at 50% 40%, rgba(204,0,0,0.10), transparent 65%),
+      radial-gradient(520px 320px at 8% 90%, rgba(11,11,13,0.04), transparent 70%),
+      var(--bg);
+  }
+  /* Soft fade from charcoal problem → cream vsl */
+  .problem + .vsl{
+    box-shadow:inset 0 80px 80px -60px rgba(15,15,18,0.18);
+  }
+
+  .system-intro{
+    background:
+      radial-gradient(700px 360px at 50% 0%, rgba(11,11,13,0.035), transparent 70%),
+      radial-gradient(600px 300px at 50% 100%, rgba(204,0,0,0.06), transparent 65%),
+      var(--bg-pure);
+  }
+  .two-part{
+    background:
+      radial-gradient(700px 460px at 5% 50%, rgba(204,0,0,0.08), transparent 60%),
+      radial-gradient(640px 420px at 95% 50%, rgba(11,11,13,0.04), transparent 65%),
+      var(--bg);
+  }
+
+  .agents-sec{
+    background:
+      radial-gradient(900px 580px at 50% 100%, rgba(204,0,0,0.14), transparent 60%),
+      radial-gradient(700px 420px at 92% 8%, rgba(255,255,255,0.04), transparent 60%),
+      var(--charcoal);
+  }
+  .two-part + .agents-sec{
+    box-shadow:inset 0 80px 80px -60px rgba(250,248,245,0.55);
+  }
+
+  .numbers{
+    background:
+      radial-gradient(700px 360px at 50% 0%, rgba(204,0,0,0.08), transparent 70%),
+      radial-gradient(600px 320px at 90% 100%, rgba(11,11,13,0.04), transparent 70%),
+      var(--bg-cream);
+  }
+  .agents-sec + .numbers{
+    box-shadow:inset 0 80px 80px -60px rgba(15,15,18,0.18);
+  }
+
+  .process{
+    background:
+      radial-gradient(600px 360px at 50% 100%, rgba(204,0,0,0.06), transparent 70%),
+      var(--bg-pure);
+  }
+  .numbers + .process{
+    box-shadow:inset 0 60px 60px -50px rgba(11,11,13,0.05);
+  }
+
+  .final-cta{
+    background:
+      radial-gradient(800px 500px at 50% 100%, rgba(204,0,0,0.18), transparent 60%),
+      radial-gradient(900px 600px at 92% 10%, rgba(204,0,0,0.06), transparent 65%),
+      var(--charcoal);
+  }
+  .process + .final-cta{
+    box-shadow:inset 0 100px 100px -70px rgba(250,248,245,0.50);
+  }
+
+  /* Lift cards a touch with refined shadows for more dimensional feel */
+  .leak-card{box-shadow:0 1px 0 rgba(255,255,255,0.03) inset, 0 20px 40px -30px rgba(0,0,0,0.5)}
+  .agent-card{box-shadow:0 1px 0 rgba(255,255,255,0.03) inset, 0 24px 50px -32px rgba(0,0,0,0.55)}
+  .tp-card{box-shadow:0 1px 0 rgba(255,255,255,0.9) inset, 0 30px 60px -40px rgba(11,11,13,0.16), 0 8px 20px -14px rgba(11,11,13,0.06)}
+  .nm-card{box-shadow:0 1px 0 rgba(255,255,255,0.9) inset, 0 20px 40px -30px rgba(11,11,13,0.12), 0 6px 18px -12px rgba(11,11,13,0.05)}
+
+  /* ---------- Mobile: tighter, more architected ---------- */
+  @media (max-width: 720px){
+    /* Floating glass header on mobile */
+    .nav{
+      top:10px;left:14px;right:14px;
+      border-radius:14px;
+      border:1px solid rgba(11,11,13,0.06);
+      background:linear-gradient(180deg, rgba(255,254,252,0.82) 0%, rgba(252,250,247,0.72) 100%);
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.8) inset,
+        0 12px 32px -16px rgba(11,11,13,0.18),
+        0 2px 6px -3px rgba(11,11,13,0.06);
+    }
+    .nav.scrolled{
+      background:linear-gradient(180deg, rgba(255,254,252,0.92) 0%, rgba(252,250,247,0.86) 100%);
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.85) inset,
+        0 18px 42px -18px rgba(11,11,13,0.24),
+        0 4px 10px -4px rgba(11,11,13,0.08);
+    }
+    .nav.hidden{transform:translateY(-150%)}
+    .nav-inner{padding:10px 14px}
+    .nav.scrolled .nav-inner{padding:9px 14px}
+    .hamburger{width:34px;height:34px;border-radius:9px}
+    .hamburger span{width:14px}
+    .mobile-menu{
+      top:70px;left:14px;right:14px;
+      border-radius:14px;border:1px solid rgba(11,11,13,0.06);
+      padding:18px 22px 22px;
+      box-shadow:0 18px 44px -18px rgba(11,11,13,0.22);
+    }
+
+    /* Push hero down so nav floats clear */
+    .hero{padding-top:108px}
+
+    /* Slightly soften ambient lighting on phones — keep it premium not busy */
+    .hero{
+      background:
+        radial-gradient(500px 320px at 92% 8%, rgba(204,0,0,0.10), transparent 60%),
+        radial-gradient(420px 300px at 4% 92%, rgba(11,11,13,0.04), transparent 70%),
+        linear-gradient(180deg, #f3eee5 0%, #f7f3eb 14%, var(--bg) 38%, var(--bg) 100%);
+    }
+    .problem,.agents-sec,.final-cta{
+      background-size:cover;
+    }
+
+    /* Ambient fades between sections — gentler on phones */
+    .problem + .vsl,
+    .agents-sec + .numbers,
+    .process + .final-cta{
+      box-shadow:inset 0 50px 50px -36px rgba(15,15,18,0.16);
+    }
+    .stats + .problem,
+    .two-part + .agents-sec{
+      box-shadow:inset 0 50px 50px -36px rgba(250,248,245,0.5);
+    }
+
+    /* Grain even subtler on mobile to keep things calm */
+    body::after{opacity:0.028}
+  }
 </style>
 </head>
 <body data-screen-label="01 Landing">
@@ -1537,6 +1767,70 @@
 </footer>
 
 <script>
+  /* ===== Atmospheric blob injection ===== */
+  (function(){
+    const cfgs = {
+      '.hero': [
+        {c:'red',       t:'-12%', l:'68%', w:560, h:520, anim:'a'},
+        {c:'red-soft',  t:'28%',  l:'82%', w:440, h:400, anim:'b'},
+        {c:'warm',      t:'42%',  l:'-10%',w:500, h:440, anim:'a'},
+        {c:'ink',       t:'80%',  l:'8%',  w:420, h:360, anim:'b'},
+      ],
+      '#problem': [
+        {c:'red',       t:'-10%', l:'78%', w:540, h:500, anim:'a'},
+        {c:'red-soft',  t:'68%',  l:'-12%',w:620, h:540, anim:'b'},
+        {c:'red',       t:'38%',  l:'40%', w:380, h:320, anim:'a'},
+      ],
+      '.vsl': [
+        {c:'red-soft',  t:'18%',  l:'36%', w:580, h:400, anim:'a'},
+        {c:'warm',      t:'-10%', l:'-10%',w:440, h:400, anim:'b'},
+        {c:'red-soft',  t:'66%',  l:'82%', w:420, h:360, anim:'b'},
+      ],
+      '.system-intro': [
+        {c:'warm',      t:'-10%', l:'10%', w:520, h:420, anim:'a'},
+        {c:'red-soft',  t:'60%',  l:'80%', w:460, h:400, anim:'b'},
+      ],
+      '.two-part': [
+        {c:'red-soft',  t:'-10%', l:'-10%',w:540, h:460, anim:'a'},
+        {c:'warm',      t:'58%',  l:'88%', w:500, h:420, anim:'b'},
+        {c:'red-soft',  t:'40%',  l:'40%', w:380, h:320, anim:'a'},
+      ],
+      '.agents-sec': [
+        {c:'red',       t:'78%',  l:'40%', w:700, h:580, anim:'a'},
+        {c:'red-soft',  t:'-10%', l:'82%', w:500, h:440, anim:'b'},
+        {c:'light',     t:'38%',  l:'-10%',w:400, h:340, anim:'a'},
+      ],
+      '.numbers': [
+        {c:'red-soft',  t:'-10%', l:'28%', w:540, h:420, anim:'a'},
+        {c:'warm',      t:'68%',  l:'82%', w:460, h:400, anim:'b'},
+        {c:'red-soft',  t:'50%',  l:'-10%',w:420, h:360, anim:'a'},
+      ],
+      '.process': [
+        {c:'warm',      t:'-10%', l:'78%', w:480, h:400, anim:'a'},
+        {c:'red-soft',  t:'68%',  l:'-10%',w:460, h:400, anim:'b'},
+      ],
+      '.final-cta': [
+        {c:'red',       t:'68%',  l:'38%', w:740, h:560, anim:'a'},
+        {c:'red-soft',  t:'-10%', l:'82%', w:500, h:440, anim:'b'},
+        {c:'red-soft',  t:'30%',  l:'-12%',w:440, h:400, anim:'a'},
+      ]
+    };
+    Object.entries(cfgs).forEach(([sel, blobs])=>{
+      const root = document.querySelector(sel);
+      if(!root) return;
+      const layer = document.createElement('div');
+      layer.className = 'blob-layer';
+      layer.setAttribute('aria-hidden','true');
+      blobs.forEach((b,i)=>{
+        const el = document.createElement('span');
+        el.className = `blob blob-${b.c} ${b.anim||'a'}`;
+        el.style.cssText = `top:${b.t};left:${b.l};width:${b.w}px;height:${b.h}px;animation-delay:${(i*-3.5).toFixed(1)}s`;
+        layer.appendChild(el);
+      });
+      root.prepend(layer);
+    });
+  })();
+
   /* ===== Nav scroll behavior ===== */
   (function(){
     const nav = document.getElementById('nav');
